@@ -285,6 +285,96 @@
 ============================ */
 const videoCarouselTrack = document.getElementById("videoCarouselTrack");
 
+/* ============================
+   YOUTUBE TITLE HYDRATION
+   (keeps hardcoded titles as fallback)
+============================ */
+const youTubeTitleCache = new Map();
+
+async function resolveYouTubeTitle(videoId) {
+  if (!videoId) return null;
+  if (youTubeTitleCache.has(videoId)) return youTubeTitleCache.get(videoId);
+
+  const watchUrl = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
+  const sources = [
+    `https://www.youtube.com/oembed?url=${encodeURIComponent(watchUrl)}&format=json`,
+    `https://noembed.com/embed?url=${encodeURIComponent(watchUrl)}`,
+  ];
+
+  for (const src of sources) {
+    try {
+      const res = await fetch(src);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const title = typeof data?.title === "string" ? data.title.trim() : "";
+      if (title) {
+        youTubeTitleCache.set(videoId, title);
+        return title;
+      }
+    } catch {
+      // ignore (common when opened via file:// where CORS/origin may be blocked)
+    }
+  }
+
+  return null;
+}
+
+function hydrateYouTubeTitles() {
+  const titleEls = Array.from(document.querySelectorAll("[data-youtube-title]"));
+  const altEls = Array.from(document.querySelectorAll("[data-youtube-alt]"));
+
+  // Titles
+  titleEls.forEach((el) => {
+    const id = el.getAttribute("data-youtube-title");
+    resolveYouTubeTitle(id).then((title) => {
+      if (title) el.textContent = title;
+    });
+  });
+
+  // Image alts (accessibility)
+  altEls.forEach((el) => {
+    const id = el.getAttribute("data-youtube-alt");
+    resolveYouTubeTitle(id).then((title) => {
+      if (title) el.setAttribute("alt", title);
+    });
+  });
+}
+
+function youTubeOriginParam() {
+  try {
+    // When opened via file://, origin may be "null" and breaks JS API control.
+    if (!window.location || !window.location.origin || window.location.origin === "null") return "";
+    return `&origin=${encodeURIComponent(window.location.origin)}`;
+  } catch {
+    return "";
+  }
+}
+
+function sendYouTubeCommand(iframe, func) {
+  try {
+    if (!iframe?.contentWindow) return;
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func, args: [] }),
+      "*"
+    );
+  } catch {
+    // ignore
+  }
+}
+
+function createPauseButton({ initiallyPaused = false, onToggle }) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "yt-pause-btn";
+  btn.setAttribute("aria-label", initiallyPaused ? "Play" : "Pause");
+  btn.textContent = initiallyPaused ? "▶" : "❚❚";
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    onToggle?.(btn);
+  });
+  return btn;
+}
+
 const videosCarousel = [
   { id: "ll08vZFexkQ", title: "Why UPSC PYQs Are Important?", thumb: "https://img.youtube.com/vi/ll08vZFexkQ/hqdefault.jpg" },
   { id: "7N2YQ9fbwlc", title: "UPSC Strategy 2026", thumb: "https://img.youtube.com/vi/7N2YQ9fbwlc/hqdefault.jpg" },
@@ -394,9 +484,12 @@ const videos = [
   { id: "aHO53WCA7aA", title: "Prelims Revision Tips" }
 ];
 
-const PLAY_DURATION = 10000; // change to 60000 for 1 minute
+const PLAY_DURATION = 45000; // 45 seconds
 let activeIndex = 2;
 let autoTimer = null;
+let centerRemaining = PLAY_DURATION;
+let centerStartedAt = 0;
+let centerPaused = false;
 
 if (ytTrack) {
   videos.forEach((v, i) => {
@@ -408,13 +501,16 @@ if (ytTrack) {
         style="background-image:url('https://img.youtube.com/vi/${v.id}/hqdefault.jpg')"
         onclick="manualPlay(${i})">
       </div>
-      <div class="card-info"><h4>${v.title}</h4></div>
+      <div class="card-info"><h4 data-youtube-title="${v.id}">${v.title}</h4></div>
     `;
     ytTrack.appendChild(card);
   });
 
   updateUI();
   playCenterVideo();
+
+  // Ensure titles match the real YouTube titles when possible
+  hydrateYouTubeTitles();
 }
 
 function updateUI() {
@@ -430,21 +526,61 @@ function playCenterVideo(withSound = false) {
   const thumb = card.querySelector(".thumb");
   const id = thumb.dataset.id;
 
+  // reset pause state on each (re)play
+  centerRemaining = PLAY_DURATION;
+  centerStartedAt = Date.now();
+  centerPaused = false;
+
   // ✅ autoplay (timer) should stay muted; manual actions can enable sound
   const muteParam = withSound ? "" : "&mute=1";
+  const originParam = youTubeOriginParam();
 
   thumb.innerHTML = `
     <iframe
-      src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1${muteParam}&loop=1&playlist=${id}"
+      src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1${muteParam}&loop=1&playlist=${id}&enablejsapi=1${originParam}"
       allow="autoplay; encrypted-media; picture-in-picture"
       allowfullscreen
       style="width:100%;height:100%;border:0;">
     </iframe>
   `;
 
+  thumb.classList.add("is-playing");
+
+  const iframe = thumb.querySelector("iframe");
+  const pauseBtn = createPauseButton({
+    initiallyPaused: false,
+    onToggle: (btn) => {
+      if (!iframe) return;
+
+      if (!centerPaused) {
+        // pause
+        centerPaused = true;
+        const elapsed = Date.now() - centerStartedAt;
+        centerRemaining = Math.max(0, centerRemaining - elapsed);
+        clearTimeout(autoTimer);
+        sendYouTubeCommand(iframe, "pauseVideo");
+        btn.textContent = "▶";
+        btn.setAttribute("aria-label", "Play");
+      } else {
+        // resume
+        centerPaused = false;
+        centerStartedAt = Date.now();
+        sendYouTubeCommand(iframe, "playVideo");
+        btn.textContent = "❚❚";
+        btn.setAttribute("aria-label", "Pause");
+
+        clearTimeout(autoTimer);
+        autoTimer = setTimeout(() => {
+          stopVideo(card, id);
+        }, centerRemaining);
+      }
+    },
+  });
+  thumb.appendChild(pauseBtn);
+
   autoTimer = setTimeout(() => {
     stopVideo(card, id);
-    nextSlide(false); // ✅ timer navigation => muted
+    // pause (stop) after PLAY_DURATION
   }, PLAY_DURATION);
 }
 
@@ -452,6 +588,9 @@ function stopVideo(card, id) {
   const thumb = card.querySelector(".thumb");
   thumb.innerHTML = "";
   thumb.style.backgroundImage = `url('https://img.youtube.com/vi/${id}/hqdefault.jpg')`;
+  thumb.classList.remove("is-playing");
+  centerPaused = false;
+  centerRemaining = PLAY_DURATION;
 }
 
 function nextSlide(withSound = true) {
@@ -517,6 +656,7 @@ function manualPlay(index) {
 
   // ✅ start with the middle card centered
   let currentVideoIndex = Math.floor(videosCarousel.length / 2);
+  const CAROUSEL_PLAY_DURATION = 45000; // 45 seconds
 
   function circularDiff(i, current, n) {
     let d = (i - current) % n;
@@ -526,8 +666,27 @@ function manualPlay(index) {
   }
 
   function clearInlinePlayers() {
-    videoCarouselTrack.querySelectorAll(".video-card iframe").forEach((f) => f.remove());
-    videoCarouselTrack.querySelectorAll(".video-card .play-btn").forEach((b) => (b.style.display = ""));
+    const cards = Array.from(videoCarouselTrack.querySelectorAll(".video-card"));
+
+    cards.forEach((card) => {
+      if (card.__playTimer) {
+        clearTimeout(card.__playTimer);
+        card.__playTimer = null;
+      }
+
+      const thumb = card.querySelector(".thumb");
+      if (!thumb) return;
+
+      thumb.querySelectorAll("iframe").forEach((f) => f.remove());
+
+      thumb.querySelectorAll(".yt-pause-btn").forEach((b) => b.remove());
+
+      const img = thumb.querySelector("img");
+      if (img) img.style.display = "";
+
+      const btn = thumb.querySelector(".play-btn");
+      if (btn) btn.style.display = "";
+    });
   }
 
   function updateVideoCarousel() {
@@ -579,18 +738,68 @@ function manualPlay(index) {
 
   function playVideoCarousel(videoId, btnEl) {
     const card = btnEl.closest(".video-card");
+    if (!card) return;
+
     const thumb = card.querySelector(".thumb");
     if (!thumb) return;
 
-    // ✅ removed mute=1 so sound can play on user click
-    thumb.innerHTML = `
-      <iframe
-        src="https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen
-        style="width:100%;height:100%;border:0;">
-      </iframe>
-    `;
+    // stop any existing players first (also restores thumbnails)
+    clearInlinePlayers();
+
+    const img = thumb.querySelector("img");
+    if (img) img.style.display = "none";
+    btnEl.style.display = "none";
+
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1${youTubeOriginParam()}`;
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+    iframe.allowFullscreen = true;
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "0";
+    thumb.appendChild(iframe);
+
+    // local pause/resume + timer pause
+    card.__remaining = CAROUSEL_PLAY_DURATION;
+    card.__startedAt = Date.now();
+    card.__paused = false;
+
+    const pauseBtn = createPauseButton({
+      initiallyPaused: false,
+      onToggle: (btn) => {
+        if (!iframe) return;
+
+        if (!card.__paused) {
+          card.__paused = true;
+          const elapsed = Date.now() - (card.__startedAt || Date.now());
+          card.__remaining = Math.max(0, (card.__remaining ?? CAROUSEL_PLAY_DURATION) - elapsed);
+          if (card.__playTimer) {
+            clearTimeout(card.__playTimer);
+            card.__playTimer = null;
+          }
+          sendYouTubeCommand(iframe, "pauseVideo");
+          btn.textContent = "▶";
+          btn.setAttribute("aria-label", "Play");
+        } else {
+          card.__paused = false;
+          card.__startedAt = Date.now();
+          sendYouTubeCommand(iframe, "playVideo");
+          btn.textContent = "❚❚";
+          btn.setAttribute("aria-label", "Pause");
+
+          if (card.__playTimer) clearTimeout(card.__playTimer);
+          card.__playTimer = setTimeout(() => {
+            clearInlinePlayers();
+          }, card.__remaining ?? CAROUSEL_PLAY_DURATION);
+        }
+      },
+    });
+    thumb.appendChild(pauseBtn);
+
+    // pause (stop) after 45 seconds
+    card.__playTimer = setTimeout(() => {
+      clearInlinePlayers();
+    }, CAROUSEL_PLAY_DURATION);
   }
 
   // expose for nav buttons
@@ -604,11 +813,11 @@ function manualPlay(index) {
     card.className = "video-card";
     card.innerHTML = `
       <div class="thumb">
-        <img src="${video.thumb}" alt="${video.title}">
+        <img src="${video.thumb}" data-youtube-alt="${video.id}" alt="${video.title}">
         <div class="play-btn"><span>▶</span></div>
       </div>
       <div class="meta">
-        <h3>${video.title}</h3>
+        <h3 data-youtube-title="${video.id}">${video.title}</h3>
         <p>${video.desc ?? ""}</p>
       </div>
     `;
@@ -624,4 +833,6 @@ function manualPlay(index) {
   });
 
   updateVideoCarousel();
+  // Ensure titles match the real YouTube titles when possible
+  hydrateYouTubeTitles();
 })();
