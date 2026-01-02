@@ -152,6 +152,19 @@ nav a {
     display: flex;
 }
 
+/* Hero image-only slides */
+.hero-slide.hero-image-slide{
+  justify-content: center;
+}
+
+.hero-slide-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0px 14px 40px rgba(2, 6, 23, 0.10);
+}
+
 .hero-text {
     flex: 1;
     z-index: 5;
@@ -1436,7 +1449,7 @@ nav a {
 ========================= */
 .video-section{
   text-align: center;
-  margin: 100px 0 0;
+  margin: -60px 0 0;
   padding: 70px 0 70px;
   display: flex;
   flex-direction: column;
@@ -1498,26 +1511,11 @@ nav a {
 
 /* round nav buttons like reference */
 .video-nav-btn{
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.10);
+ 
   background: #fff;
-  box-shadow: 0 14px 40px rgba(2, 6, 23, 0.12);
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  z-index: 5000;              /* stay clickable above cards */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
+  
 }
-.video-nav-btn:active{ transform: scale(0.98); }
+.video-nav-btn:active{ transform: translateY(-50%) scale(0.98); }
 
 .video-nav-btn.video-next{
   left: auto;
@@ -1624,6 +1622,14 @@ nav a {
 }
 
 @media (max-width: 560px){
+  .video-carousel-container{
+    padding: 0 52px; /* keep carousel centered; leave room for arrows */
+  }
+
+  .video-card{
+    width: min(520px, 86vw);
+  }
+
   .video-nav-btn{ width: 46px; height: 46px; }
   .video-carousel-wrapper{ height: 360px; }
   .video-thumb-img{ height: 240px; }
