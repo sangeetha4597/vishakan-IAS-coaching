@@ -411,6 +411,13 @@ function manualPlay(index) {
     const cards = Array.from(videoCarouselTrack.querySelectorAll(".video-card"));
     const n = cards.length;
 
+    const isSmall = window.matchMedia("(max-width: 560px)").matches;
+    const isMedium = window.matchMedia("(max-width: 900px)").matches;
+    const xStep = isSmall ? 190 : isMedium ? 260 : 340;
+    const activeScale = isSmall ? 1.03 : 1.06;
+    const sideScale = isSmall ? 0.86 : 0.88;
+    const sideOpacity = isSmall ? 0.32 : 0.40;
+
     cards.forEach((card, i) => {
       const d = circularDiff(i, currentVideoIndex, n);
 
@@ -426,9 +433,9 @@ function manualPlay(index) {
         return;
       }
 
-      const x = d * 340;
-      const scale = d === 0 ? 1.06 : 0.88;
-      const opacity = d === 0 ? 1 : 0.40;
+      const x = d * xStep;
+      const scale = d === 0 ? activeScale : sideScale;
+      const opacity = d === 0 ? 1 : sideOpacity;
 
       card.style.opacity = String(opacity);
       card.style.pointerEvents = "auto";
@@ -557,6 +564,12 @@ function manualPlay(index) {
   updateVideoCarousel();
   // Ensure titles match the real YouTube titles when possible
   hydrateYouTubeTitles();
+
+  // Keep spacing correct when resizing between breakpoints
+  if (!window.__videoCarouselResizeBound) {
+    window.__videoCarouselResizeBound = true;
+    window.addEventListener("resize", () => updateVideoCarousel());
+  }
 })();
 
 
