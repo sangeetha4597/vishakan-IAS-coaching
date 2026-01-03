@@ -8,6 +8,19 @@
   --page-pad-y: clamp(44px, 6vw, 80px);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
 body {
   font-family: var(--font-base);
   font-weight: 400;
@@ -25,6 +38,11 @@ body {
     font-family: var(--font-base);
     background: #ffffff;
   color: var(--color-primary);
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
@@ -1049,6 +1067,11 @@ nav a:hover {
     padding: 12px 28px;
   }
 
+  /* Courses grid: 2 columns on tablets */
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   /* HERO SLIDER */
   .hero-slider {
     height: auto;
@@ -1110,6 +1133,18 @@ nav a:hover {
     margin: 0;
   }
 
+  /* Reduce global heading padding on mobile */
+  h1, h2, h3 {
+    padding: 10px 0;
+  }
+
+  /* Base <p> is large with !important; override only plain paragraphs on mobile */
+  p:not([class]) {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    padding: 10px 0 !important;
+  }
+
   /* NAV */
   .nav {
     min-height: auto;
@@ -1124,6 +1159,16 @@ nav a:hover {
     justify-content: center;
     gap: 14px;
     padding-left: 0;
+  }
+
+  .logo-area {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .logo-area h2 {
+    white-space: normal;
   }
 
   .nav-cta {
@@ -1186,6 +1231,13 @@ nav a:hover {
     padding: var(--page-pad-y) var(--page-pad-x);
   }
 
+  .contact-icons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 28px;
+  }
+
   .contact-left,
   .contact-right,
   .contact-form-card {
@@ -1240,6 +1292,27 @@ nav a:hover {
 }
 
 @media (max-width: 360px) {
+  :root {
+    --page-pad-x: 16px;
+    --page-pad-y: 44px;
+  }
+
+  /* Hard-stop horizontal overflow on 360px devices */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Global typography/padding is heavy; tighten for 360px */
+  h1, h2, h3 {
+    padding: 8px 0;
+  }
+
+  p:not([class]) {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+    padding: 8px 0 !important;
+  }
+
   /* NAV: stack links + CTA cleanly */
   nav ul {
     flex-direction: column;
@@ -1271,6 +1344,10 @@ nav a:hover {
     line-height: 1.2;
   }
 
+  nav ul {
+    gap: 8px;
+  }
+
   /* HERO buttons */
   .hero-buttons {
     gap: 10px;
@@ -1280,6 +1357,17 @@ nav a:hover {
     width: 100%;
     text-align: center;
   }
+
+  /* HERO: avoid wide paddings */
+  .slider-container {
+    padding: 0 12px;
+  }
+
+  /* Video carousel: keep arrows usable on 360px */
+  .video-carousel-container{
+    padding: 0 42px;
+    width: 100%;
+  }
 }
 @media (max-width: 640px) {
   .why-container h2 {
@@ -1287,6 +1375,11 @@ nav a:hover {
   }
 
   .why-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Courses: single column on small phones */
+  .cards {
     grid-template-columns: 1fr;
   }
 }
