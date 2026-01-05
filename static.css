@@ -1273,6 +1273,7 @@ nav a:hover {
     max-width: none;
   }
 
+  
   .row {
     flex-direction: column;
   }
@@ -1441,67 +1442,6 @@ nav a:hover {
     margin: 0 0 40px 0;
 }
 /* /////////////////////////////////////// */
-    
-/* /////////////////////////////////////// */
-/* ................................................................. */
-/* .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        .swiper-slide {
-            background: #fff;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-        }
-        .swiper-scrollbar {
-            height: 6px !important;
-            background: #e5e7eb !important; /* light grey track */
-            /* border-radius: 10px;
-            margin-top: 20px;
-         }
-            .swiper-scrollbar-drag {
-                background: #f4b321 !important; /* gold drag bar */
-                /* border-radius: 10px;
-            }
-            .swiper-horizontal>.swiper-scrollbar {
-                position: absolute;
-                left: 2%;
-                bottom: -317px;
-                z-index: 34;
-                height: 5px;
-                 width: 98%;
-                 }
-        
-                .swiper-slide .swiper-scrollbar {
-                        position: absolute;
-                        bottom: -317;
-                        height: 4px;
-                        width: 80%;
-                        left: 10%;
-                        background: #e5e7eb;
-                        border-radius: 10px;
-                    }
-
-                    .swiper-scrollbar {
-                        height: 6px !important;
-                        background: #e5e7eb !important; /* light grey track */
-                        /* border-radius: 10px;
-                        margin-top: 20px;
-                    }
-
-                    .swiper-scrollbar-drag {
-                        background: #f4b321 !important; /* gold drag bar */
-                        /* border-radius: 10px;
-}  */ 
-
-/* ................................................................. */
 
 /* SLIDER */
 .center-slider {
@@ -1935,6 +1875,15 @@ nav a:hover {
   width: 100%;
  max-width: 337px;
 }
+.contact-right .underline {
+  width: 99px;
+  height: 8px;
+  background: var(--color-primary);
+  /* margin: 14px 0 14px; */
+  border-radius: 999px;
+  padding: 0;
+
+}
 
 .contact-left { justify-self: anchor-center; }
 .contact-right { justify-self: anchor-center; }
@@ -1960,12 +1909,13 @@ nav a:hover {
 }
 
 .contact-left .underline {
-  width: 120px;
-  height: 7px;
-  background: var(--color-primary);
-  margin: 14px 0 14px;
-  border-radius: 999px;
-  padding: 0;
+     width: 146px;
+    height: 8px;
+    background: var(--color-primary);
+    margin: 0px 0 7px;
+    border-radius: 999px;
+    padding: 0;
+
 }
 
 
