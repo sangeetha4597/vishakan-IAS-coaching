@@ -15,8 +15,8 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="http://code.jquery.com/jquery-1.9.1.min.js">
   </script>
@@ -79,7 +79,7 @@
           <img class="hero-slide-img" src="./assets/slider3.png" alt="Hero slide 3">
         </div>
       </div>
-      
+
 
       <!-- Navigation Dots -->
       <div class="hero-dots">
@@ -143,7 +143,7 @@
   </section>
 
 
- 
+
   <!-- Courses Offered Section  -------------------------------------------------------------------------------------------------------------->
 
 
@@ -203,11 +203,11 @@
     </div>
   </section>
 
-   
+
   <!-- End of Courses Offered Section  -------------------------------------------------------------------------------------------------------------->
 
   <!-- why choose us  -------------------------------------------------------------------------------------------------------------->
-  <section  id="choose" class="why-section">
+  <section id="choose" class="why-section">
     <div class="why-container">
       <h2>Why Choose Us?</h2>
       <p>The Distinctive Edge for Your IAS Aspiration.</p>
@@ -263,7 +263,7 @@
     </div>
   </section>
   <!-- -------------------------------------------------------------------------------------------------------------- -->
-  
+
 
 
 
@@ -309,8 +309,9 @@
       <div class="achievers-grid">
         <article class="achiever-card">
           <div class="achiever-avatar">
-            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Priya Sharma" onerror="this.remove();">
-           
+            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Priya Sharma"
+              onerror="this.remove();">
+
           </div>
 
           <p class="achiever-quote">
@@ -325,8 +326,9 @@
 
         <article class="achiever-card">
           <div class="achiever-avatar">
-            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Arjun Verma" onerror="this.remove();">
-          
+            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Arjun Verma"
+              onerror="this.remove();">
+
           </div>
 
           <p class="achiever-quote">
@@ -341,8 +343,9 @@
 
         <article class="achiever-card">
           <div class="achiever-avatar">
-            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Anjali Singh" onerror="this.remove();">
-            
+            <img class="achiever-avatar-img" src="./assets/achiever_photo1.png" alt="Anjali Singh"
+              onerror="this.remove();">
+
           </div>
 
           <p class="achiever-quote">
@@ -391,7 +394,7 @@
     </div>
 
     <!-- CENTER FORM -->
-    <div class="contact-form-card" id="contact-form">
+    <div class="contact-form-card">
       <h2>Get in Touch</h2>
       <p class="form-subtitle">Any Time Available..</p>
 
@@ -399,17 +402,13 @@
       <div id="contact-toast" class="toast" role="status" aria-live="polite" hidden></div>
 
       <!-- Use FormSubmit AJAX endpoint to avoid redirect (handle submit via fetch in JS) -->
-      <form
-        id="contact-form"
-        action="https://formsubmit.co/ajax/sangeetha451997@gmail.com"
-        method="POST"
-        enctype="multipart/form-data"
-      >
+      <form id="contact-form" action="https://formsubmit.co/ajax/sangeetha451997@gmail.com" method="POST"
+        enctype="multipart/form-data">
         <!-- honeypot -->
-        <input type="text" name="_honey" style="display:none;">
+        <!-- <input type="text" name="_honey" style="display:none;"> -->
 
         <!-- disable captcha -->
-        <input type="hidden" name="_captcha" value="false">
+        <!-- <input type="hidden" name="_captcha" value="false"> -->
 
         <div class="row">
           <input type="text" name="first_name" placeholder="First name" required>
@@ -417,7 +416,8 @@
         </div>
 
         <input type="email" name="email" placeholder="Your Email" required>
-        <input type="tel" name="phone" placeholder="Phone number" required>
+        <input type="tel" name="phone" placeholder="Phone number" required inputmode="numeric" pattern="[0-9]*"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
         <textarea name="message" placeholder="Your Message" required></textarea>
 
         <button type="submit">Send Message</button>
@@ -438,7 +438,8 @@
 
       <div class="footer-box">
         <ul>
-          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/9025043764 " target="_blank">90250 43764 </a></li>
+          <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/9025043764 " target="_blank">90250 43764 </a>
+          </li>
           <!-- <li><i class="fa-brands fa-facebook"></i> <a href="https://www.facebook.com/vishakansirsclasses/"
               target="_blank">Facebook</a></li> -->
           <!-- <li><i class="fa-brands fa-twitter"></i> <a href="https://twitter.com/vishakansirsclasses"
@@ -447,7 +448,8 @@
               target="_blank">YouTube</a></li>
           <li><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/vishakansirsclasses/"
               target="_blank">Instagram</a></li>
-          <li><i class="fa-brands fa-telegram"></i> <a href="https://t.me/vishakan_raman" target="_blank">vishakan_raman</a>
+          <li><i class="fa-brands fa-telegram"></i> <a href="https://t.me/vishakan_raman"
+              target="_blank">vishakan_raman</a>
           </li>
         </ul>
       </div>
