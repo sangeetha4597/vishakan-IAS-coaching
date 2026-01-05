@@ -2328,7 +2328,7 @@ footer {
 /* THUMBNAIL */
 .thumb {
   position: relative;
-  height: 371px;
+  height: 321px;
   background-size: cover;
   background-position: center;
   cursor: pointer;
@@ -2792,7 +2792,7 @@ footer ul li i > svg{
 } */
 
 .courses {
-  max-width: 1320px;
+  max-width: 1354px;
   margin: 60px auto;
   padding: 0 var(--page-pad-x);
   text-align: center;
@@ -2801,12 +2801,14 @@ footer ul li i > svg{
 .courses h1 {
   font-size: 32px;
   font-weight: 700;
-  color: #1c2e4a;
   margin-bottom: 10px;
 }
 
+.courses h1 {
+  padding-top: 0rem;
+}
+
 .subtitle {
-  color: #6b7280;
   margin-bottom: 20px;
 }
 
@@ -2829,7 +2831,7 @@ footer ul li i > svg{
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 30px 25px;
+  padding: 25px 25px;
   text-align: left;
   align-content: flex-end;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
@@ -2841,6 +2843,7 @@ footer ul li i > svg{
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .card .desc {
