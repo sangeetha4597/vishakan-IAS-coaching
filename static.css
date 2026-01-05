@@ -247,8 +247,8 @@ nav a:hover {
 }
 
 .hero-slide-img{
-     width: 88%;
-    height: 109%;
+    width: 83%;
+    height: 112%;
   object-fit: cover;
   border-radius: 18px;
   box-shadow: 0px 14px 40px rgba(2, 6, 23, 0.10);
@@ -991,7 +991,7 @@ nav a:hover {
 .why-section {
     width: 100%;
   background: var(--color-primary); /* Navy blue background */
-    padding: 42px 0 55px;
+   padding: 2px 0 0px;
     text-align: center;
     color: white;
     margin-top: 0;
@@ -2387,18 +2387,18 @@ footer {
 
 .achievers-subtitle{
   text-align: center;
-  margin: 10px 0 0;
+ margin: -40px -10px -1px;
   color: #64748b;
   font-size: 15px;
 }
 
 .achievers-underline{
-  display: block;
-  width: 64px;
-  height: 6px;
-  background: #1976d2;
-  border-radius: 999px;
-  margin: 18px auto 0;
+      display: block;
+    width: 66px;
+    height: 7px;
+    background: #1976d2;
+    border-radius: 999px;
+    margin: -8px 479px -1px;
 }
 
 .achievers-grid{
@@ -2763,6 +2763,7 @@ footer ul li i > svg{
 
 .subtitle {
   margin-bottom: 20px;
+  margin: -40px -10px -1px;
 }
 
 .divider {
