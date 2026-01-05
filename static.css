@@ -1098,8 +1098,9 @@ nav a:hover {
 
   /* HERO SLIDER */
   .hero-slider {
-    height: auto;
-    padding: 26px 0 22px 0;
+        height: 98%;
+        width: 103%;
+        padding-left: 34px;
   }
 
   .slider-container {
