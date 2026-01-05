@@ -1262,7 +1262,14 @@ padding: 0 !important;
     column-gap: 0;
     row-gap: 28px;
     padding: var(--page-pad-y) var(--page-pad-x);
+    width: 100%;
+    justify-items: stretch;
   }
+
+  /* Mobile order: left -> form -> right */
+  .contact-left { grid-row: 1; }
+  .contact-form-card { grid-row: 2; }
+  .contact-right { grid-row: 3; }
 
   .contact-icons {
     flex-wrap: wrap;
