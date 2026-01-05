@@ -2060,7 +2060,7 @@ nav a:hover {
 
 .contact-form-card input,
 .contact-form-card textarea {
-  width:  95%;
+  width:  100%;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 8px;
