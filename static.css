@@ -1252,7 +1252,7 @@ padding: 0 !important;
 
   /* Achievers */
   .achievers-section {
-        width: 75%;
+        width: 74%;
         height: 33%; 
   }
 
@@ -1624,7 +1624,7 @@ padding: 0 !important;
   height: 6px;
   background: var(--color-primary);
   border-radius: 999px;
-  margin: 18px auto 0;
+ margin: 16px -27px -22px;
 }
 
 /* container that holds arrows + carousel */
