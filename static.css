@@ -1025,6 +1025,7 @@ padding: 0 !important;
   padding: 45px 0 70px;
 }
 
+
 .why-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2732,17 +2733,6 @@ footer ul li i > svg{
 .contact-right .footer-box ul li i.fa-telegram{ background: #229ED9; }
 
 
-/* COURSES SECTION */
-/* styles.css */
-/* * {
-  box-sizing: border-box;
-} */
-
-/* body {
-  margin: 0;
-  background: #ffffff;
-  color: #333;
-} */
 
 .courses {
   max-width: 1354px;
