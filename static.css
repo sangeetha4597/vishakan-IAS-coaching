@@ -1261,9 +1261,10 @@ padding: 0 !important;
     grid-template-columns: 1fr;
     column-gap: 0;
     row-gap: 28px;
-    padding: var(--page-pad-y) var(--page-pad-x);
+    /* padding: var(--page-pad-y) var(--page-pad-x); */
     width: 100%;
     justify-items: stretch;
+    padding: 10px;
   }
 
   /* Mobile order: left -> form -> right */
