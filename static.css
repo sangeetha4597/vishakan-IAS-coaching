@@ -1221,7 +1221,8 @@ nav a:hover {
 
   /* About */
   .about-founder {
-    padding: 55px 0 55px;
+    padding: 55px 0 55px;width: 74%;
+
   }
 
   .about-founder-header h2 {
