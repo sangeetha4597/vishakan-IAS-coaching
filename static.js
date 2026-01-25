@@ -247,6 +247,40 @@ function updateUI() {
   });
 }
 
+/* ============================
+   MOBILE NAV (HAMBURGER)
+============================ */
+(() => {
+  const topBar = document.querySelector(".top-bar");
+  const toggleBtn = document.querySelector(".nav-toggle");
+  const navList = document.getElementById("primary-nav");
+  if (!topBar || !toggleBtn || !navList) return;
+
+  function setOpen(isOpen) {
+    topBar.classList.toggle("nav-open", isOpen);
+    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+    toggleBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    toggleBtn.textContent = isOpen ? "✕" : "☰";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    setOpen(!topBar.classList.contains("nav-open"));
+  });
+
+  // Close menu after clicking a link
+  navList.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target && target.closest && target.closest("a")) {
+      setOpen(false);
+    }
+  });
+
+  // Reset on resize to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setOpen(false);
+  });
+})();
+
 function playCenterVideo(withSound = false) {
   clearTimeout(autoTimer);
 

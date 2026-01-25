@@ -163,6 +163,23 @@ nav a:hover {
   color: rgba(var(--color-primary-rgb), 0.85);
 }
 
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 10px 12px;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid rgba(var(--color-primary-rgb), 0.35);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
 .btn {
     padding: 12px 22px;
     border-radius: 8px;
@@ -1180,17 +1197,38 @@ padding: 0 !important;
   /* NAV */
   .nav {
     min-height: auto;
-  }
-
-  .nav {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
   }
 
-  nav ul {
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding-left: 0;
+    margin-left: auto;
+  }
+
+  nav {
+    flex: 0 0 100%;
+    justify-content: flex-start;
+  }
+
+  /* Collapsed by default on mobile */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 0 6px;
+    margin: 0;
+  }
+
+  /* Expanded state */
+  .top-bar.nav-open nav ul {
+    display: flex;
   }
 
   nav a {
@@ -1198,9 +1236,9 @@ padding: 0 !important;
   }
 
   .logo-area {
-    flex-direction: column;
-    gap: 6px;
-    text-align: center;
+    flex-direction: row;
+    gap: 10px;
+    text-align: left;
   }
 
   .logo-area h2 {
