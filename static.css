@@ -1123,7 +1123,7 @@ padding: 0 !important;
   .hero-slider {
         height: 98%;
         width: 103%;
-        padding-left: 34px;
+        padding-left: 49px;
   }
 
   .slider-container {
@@ -1447,6 +1447,12 @@ padding: 0 !important;
     flex-direction: column;
     gap: 6px;
     text-align: center;
+    padding-left: 28px;
+  }
+  .logo-area  .logo {
+    width: 77px;
+    height: 68px;
+
   }
 
   .logo-area h2 {
