@@ -148,6 +148,16 @@ function playVideoCarousel(videoId, el) {
 let currentHeroSlide = 0;
 const heroSlides = document.querySelectorAll(".hero-slide");
 const heroDots = document.querySelectorAll(".hero-dot");
+const heroPrevBtn = document.querySelector(".hero-prev");
+const heroNextBtn = document.querySelector(".hero-next");
+const heroDotsWrap = document.querySelector(".hero-dots");
+
+// If there is only one (or zero) hero slide, hide navigation controls
+if (heroSlides.length <= 1) {
+  if (heroPrevBtn) heroPrevBtn.style.display = "none";
+  if (heroNextBtn) heroNextBtn.style.display = "none";
+  if (heroDotsWrap) heroDotsWrap.style.display = "none";
+}
 
 function showHeroSlide(index) {
   if (!heroSlides.length || !heroDots.length) return; // ✅ guard
