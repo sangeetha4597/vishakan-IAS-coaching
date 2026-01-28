@@ -94,11 +94,11 @@ function createPauseButton({ initiallyPaused = false, onToggle }) {
 }
 
 const videosCarousel = [
-  { id: "ll08vZFexkQ", title: "Why UPSC PYQs Are Important?", thumb: "https://img.youtube.com/vi/ll08vZFexkQ/hqdefault.jpg" },
-  { id: "7N2YQ9fbwlc", title: "UPSC Strategy 2026", thumb: "https://img.youtube.com/vi/7N2YQ9fbwlc/hqdefault.jpg" },
-  { id: "aoXfzlWtez8", title: "Answer Writing Practice", thumb: "https://img.youtube.com/vi/aoXfzlWtez8/hqdefault.jpg" },
-  { id: "tz6G0g4gBLI", title: "Current Affairs Analysis", thumb: "https://img.youtube.com/vi/tz6G0g4gBLI/hqdefault.jpg" },
-  { id: "aHO53WCA7aA", title: "Prelims Revision Tips", thumb: "https://img.youtube.com/vi/aHO53WCA7aA/hqdefault.jpg" }
+  { id: "djji9bvQCXY", title: "Video 1", thumb: "https://img.youtube.com/vi/djji9bvQCXY/hqdefault.jpg" },
+  { id: "XUz1Km2fhB0", title: "Video 2", thumb: "https://img.youtube.com/vi/XUz1Km2fhB0/hqdefault.jpg" },
+  { id: "ylnfSnssT9c", title: "Video 3", thumb: "https://img.youtube.com/vi/ylnfSnssT9c/hqdefault.jpg" },
+  { id: "tz6G0g4gBLI", title: "Video 4", thumb: "https://img.youtube.com/vi/tz6G0g4gBLI/hqdefault.jpg" },
+  { id: "a8kNGgCK31o", title: "Video 5", thumb: "https://img.youtube.com/vi/a8kNGgCK31o/hqdefault.jpg" }
 ];
 
 let currentVideoIndex = 0;
@@ -205,15 +205,15 @@ if (track) {
 const ytTrack = document.getElementById("ytTrack");
 
 const videos = [
-  { id: "ll08vZFexkQ", title: "Why UPSC PYQs Are Important?" },
-  { id: "7N2YQ9fbwlc", title: "UPSC Strategy 2026" },
-  { id: "aoXfzlWtez8", title: "Answer Writing Practice" },
-  { id: "tz6G0g4gBLI", title: "Current Affairs Analysis" },
-  { id: "aHO53WCA7aA", title: "Prelims Revision Tips" }
+  { id: "djji9bvQCXY", title: "Video 1" },
+  { id: "XUz1Km2fhB0", title: "Video 2" },
+  { id: "ylnfSnssT9c", title: "Video 3" },
+  { id: "tz6G0g4gBLI", title: "Video 4" },
+  { id: "a8kNGgCK31o", title: "Video 5" }
 ];
 
 const PLAY_DURATION = 45000; // 45 seconds
-let activeIndex = 2;
+let activeIndex = 0;
 let autoTimer = null;
 let centerRemaining = PLAY_DURATION;
 let centerStartedAt = 0;
@@ -385,39 +385,39 @@ function manualPlay(index) {
 
   const videosCarousel = [
     {
-      id: "ll08vZFexkQ",
-      title: "Why UPSC PYQs Are Important?",
-      desc: "An in-depth look into UPSC PYQs with examples.",
-      thumb: "https://img.youtube.com/vi/ll08vZFexkQ/hqdefault.jpg",
+      id: "djji9bvQCXY",
+      title: "Video 1",
+      desc: "",
+      thumb: "https://img.youtube.com/vi/djji9bvQCXY/hqdefault.jpg",
     },
     {
-      id: "7N2YQ9fbwlc",
-      title: "UPSC Strategy 2026",
-      desc: "Complete preparation roadmap.",
-      thumb: "https://img.youtube.com/vi/7N2YQ9fbwlc/hqdefault.jpg",
+      id: "XUz1Km2fhB0",
+      title: "Video 2",
+      desc: "",
+      thumb: "https://img.youtube.com/vi/XUz1Km2fhB0/hqdefault.jpg",
     },
     {
-      id: "aoXfzlWtez8",
-      title: "Answer Writing Practice",
-      desc: "Improve mains performance.",
-      thumb: "https://img.youtube.com/vi/aoXfzlWtez8/hqdefault.jpg",
+      id: "ylnfSnssT9c",
+      title: "Video 3",
+      desc: "",
+      thumb: "https://img.youtube.com/vi/ylnfSnssT9c/hqdefault.jpg",
     },
     {
       id: "tz6G0g4gBLI",
-      title: "Current Affairs Analysis",
-      desc: "Monthly breakdown and insights.",
+      title: "Video 4",
+      desc: "",
       thumb: "https://img.youtube.com/vi/tz6G0g4gBLI/hqdefault.jpg",
     },
     {
-      id: "aHO53WCA7aA",
-      title: "Prelims Revision Tips",
-      desc: "Smart revision techniques.",
-      thumb: "https://img.youtube.com/vi/aHO53WCA7aA/hqdefault.jpg",
+      id: "a8kNGgCK31o",
+      title: "Video 5",
+      desc: "",
+      thumb: "https://img.youtube.com/vi/a8kNGgCK31o/hqdefault.jpg",
     },
   ];
 
-  // ✅ start with the middle card centered
-  let currentVideoIndex = Math.floor(videosCarousel.length / 2);
+  // ✅ start with the first card centered
+  let currentVideoIndex = 0;
   const CAROUSEL_PLAY_DURATION = 45000; // 45 seconds
 
   function circularDiff(i, current, n) {
