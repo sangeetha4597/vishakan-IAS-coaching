@@ -186,18 +186,85 @@ if (heroSlides.length && heroDots.length) {
 /* ============================
    TESTIMONIAL SLIDER
 ============================ */
-const track = document.getElementById("sliderTrack");
-const dots = document.querySelectorAll(".dot");
+(() => {
+  const track = document.getElementById("achieversTrack");
+  if (!track) return;
 
-if (track) {
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      track.style.transform = `translateX(-${dot.dataset.slide * 100}%)`;
-      dots.forEach(d => d.classList.remove("active"));
-      dot.classList.add("active");
+  const slides = Array.from(track.querySelectorAll(".achiever-slide"));
+
+  let index = 0;
+
+  function circularDiff(i, current, n) {
+    let d = (i - current) % n;
+    if (d < 0) d += n;
+    if (d > n / 2) d -= n;
+    return d;
+  }
+
+  function update() {
+    const n = slides.length;
+    if (!n) return;
+
+    const isSmall = window.matchMedia("(max-width: 560px)").matches;
+    const isMedium = window.matchMedia("(max-width: 900px)").matches;
+    const xStep = isSmall ? 175 : isMedium ? 240 : 320;
+    const activeScale = isSmall ? 1.02 : 1.05;
+    const sideScale = isSmall ? 0.90 : 0.92;
+    const sideOpacity = isSmall ? 0.34 : 0.42;
+
+    slides.forEach((slide, i) => {
+      const d = circularDiff(i, index, n);
+
+      // show only 3: left, center, right
+      if (Math.abs(d) > 1) {
+        slide.style.opacity = "0";
+        slide.style.pointerEvents = "none";
+        slide.style.transform = `translateX(-50%) translateX(${d * xStep}px) scale(0.80)`;
+        slide.style.zIndex = "0";
+        return;
+      }
+
+      const x = d * xStep;
+      const scale = d === 0 ? activeScale : sideScale;
+      const opacity = d === 0 ? 1 : sideOpacity;
+
+      slide.style.opacity = String(opacity);
+      slide.style.pointerEvents = "auto";
+      slide.style.zIndex = String(100 - Math.abs(d));
+      slide.style.transform = `translateX(-50%) translateX(${x}px) scale(${scale})`;
+      slide.style.filter = d === 0 ? "none" : "brightness(0.95) saturate(0.95)";
+
+      // Clicking side cards should move like the video section
+      slide.onclick = () => {
+        index = i;
+        update();
+      };
     });
-  });
-}
+  }
+
+  function next() {
+    if (!slides.length) return;
+    index = (index + 1) % slides.length;
+    update();
+  }
+
+  function prev() {
+    if (!slides.length) return;
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  }
+
+  // Expose for inline onclick
+  window.nextTestimonialSlide = next;
+  window.prevTestimonialSlide = prev;
+
+  update();
+
+  if (!window.__achieversCarouselResizeBound) {
+    window.__achieversCarouselResizeBound = true;
+    window.addEventListener("resize", () => update());
+  }
+})();
 
 /* ============================
    YOUTUBE CENTER VIDEO SLIDER

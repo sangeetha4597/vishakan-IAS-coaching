@@ -2479,11 +2479,63 @@ footer {
     margin: -8px 479px -1px;
 }
 
+.achievers-carousel{
+  margin-top: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.achievers-carousel-viewport{
+  width: min(1100px, 100%);
+  height: 430px;
+  overflow: visible;
+}
+
+.achievers-carousel-track{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.achiever-slide{
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(520px, 78vw);
+  transform: translateX(-50%) scale(0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 320ms ease, opacity 320ms ease, filter 320ms ease;
+}
+
+.achiever-slide .achiever-card{
+  width: 100%;
+}
+
+@media (max-width: 900px){
+  .achievers-carousel-viewport{ height: 440px; }
+  .achiever-slide{ width: min(460px, 84vw); }
+}
+
+@media (max-width: 560px){
+  .achievers-carousel-viewport{ height: 480px; }
+  .achiever-slide{ width: min(420px, 88vw); }
+}
+
 .achievers-grid{
   margin-top: 46px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 34px;
+}
+
+/* Responsive: show slider controls comfortably on mobile */
+@media (max-width: 560px){
+  .achievers-carousel{
+    gap: 0;
+  }
 }
 
 .achiever-card{
