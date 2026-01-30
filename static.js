@@ -516,6 +516,8 @@ function manualPlay(index) {
   const videoCarouselTrack = document.getElementById("videoCarouselTrack");
   if (!videoCarouselTrack) return;
 
+  const carouselWrapper = document.querySelector(".video-carousel-wrapper");
+
   const videosCarousel = [
     {
       id: "djji9bvQCXY",
@@ -647,6 +649,23 @@ function manualPlay(index) {
     const card = btnEl.closest(".video-card");
     if (!card) return;
 
+    // Only allow playback from the centered card.
+    // If user taps play on a side card, center it first, then play.
+    const cards = Array.from(videoCarouselTrack.querySelectorAll(".video-card"));
+    const cardIndex = cards.indexOf(card);
+    if (cardIndex !== -1 && cardIndex !== currentVideoIndex) {
+      currentVideoIndex = cardIndex;
+      clearInlinePlayers();
+      updateVideoCarousel();
+      // wait a tick so layout updates before injecting iframe
+      setTimeout(() => {
+        const centeredCard = cards[currentVideoIndex];
+        const centeredBtn = centeredCard?.querySelector(".play-btn");
+        if (centeredBtn) playVideoCarousel(videoId, centeredBtn);
+      }, 50);
+      return;
+    }
+
     const thumb = card.querySelector(".thumb");
     if (!thumb) return;
 
@@ -712,6 +731,51 @@ function manualPlay(index) {
   // expose for nav buttons
   window.nextVideoSlide = nextVideoSlide;
   window.prevVideoSlide = prevVideoSlide;
+
+  // Mobile swipe/tap support
+  if (!window.__videoCarouselSwipeBound && carouselWrapper) {
+    window.__videoCarouselSwipeBound = true;
+
+    let startX = 0;
+    let startY = 0;
+
+    carouselWrapper.addEventListener(
+      "touchstart",
+      (e) => {
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        startX = t.clientX;
+        startY = t.clientY;
+      },
+      { passive: true }
+    );
+
+    carouselWrapper.addEventListener(
+      "touchend",
+      (e) => {
+        const t = e.changedTouches && e.changedTouches[0];
+        if (!t) return;
+
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        // tap: right half => next, left half => prev
+        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+          const rect = carouselWrapper.getBoundingClientRect();
+          const x = t.clientX - rect.left;
+          if (x > rect.width / 2) nextVideoSlide();
+          else prevVideoSlide();
+          return;
+        }
+
+        // swipe
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        if (dx < 0) nextVideoSlide();
+        else prevVideoSlide();
+      },
+      { passive: true }
+    );
+  }
 
   // build cards once
   videoCarouselTrack.innerHTML = "";
