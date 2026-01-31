@@ -2697,6 +2697,8 @@ footer {
 /* Neha avatar: show full artwork (no crop) */
 .achiever-avatar--neha{
   background: #ffffff;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
 }
 
 .achiever-avatar-img{
@@ -3072,11 +3074,16 @@ footer ul li i > svg{
 
 .card h2 {
   font-family: var(--font-base);
-  font-size: 30px;
+  font-size: clamp(18px, 1.9vw, 30px);
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 12px;
   text-align: center;
+  line-height: 1.15;
+  min-height: 2.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card .desc {
