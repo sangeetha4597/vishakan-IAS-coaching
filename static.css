@@ -2082,12 +2082,12 @@ padding: 0 !important;
  max-width: 337px;
 }
 .contact-right .underline {
-  width: 114px !important;
-  height: 8px;
-  background: var(--color-primary);
-  margin: -3px 68px 5px;
-  border-radius: 999px;
-  padding-left: 10px !important;
+  width: 130px !important;
+    height: 8px;
+    background: var(--color-primary);
+    margin: -1px 2px 5px;
+    border-radius: 999px;
+    padding-left: 10px !important;
 
 }
 
@@ -2109,7 +2109,7 @@ padding: 0 !important;
 
 .contact-right h1 {
   color: var(--color-primary);
-  font-size: 38px;
+  font-size: 46px;
   padding: 0;
   margin: 0;
 }
@@ -2188,6 +2188,8 @@ padding: 0 !important;
   color: #000000;
   font-size: 13px;
   white-space: nowrap;
+  padding-bottom: 13px;
+
 }
 
 /* CENTER FORM */
