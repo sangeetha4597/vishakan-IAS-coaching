@@ -405,6 +405,56 @@ function buildHeroSlider(imageUrls) {
     render();
   });
 
+  // Mobile: allow swipe and tap-left/tap-right navigation when buttons are hidden
+  let startX = 0;
+  let startY = 0;
+  slider.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.touches && e.touches[0];
+      if (!t) return;
+      startX = t.clientX;
+      startY = t.clientY;
+    },
+    { passive: true }
+  );
+
+  slider.addEventListener(
+    "touchend",
+    (e) => {
+      const t = e.changedTouches && e.changedTouches[0];
+      if (!t) return;
+
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      const slides = getSlides();
+      if (slides.length <= 1) return;
+
+      // Tap (very small movement): left half = prev, right half = next
+      if (absX < 10 && absY < 10) {
+        const rect = slider.getBoundingClientRect();
+        const isRight = (t.clientX - rect.left) > rect.width / 2;
+        index = isRight ? (index + 1) % slides.length : (index - 1 + slides.length) % slides.length;
+        render();
+        return;
+      }
+
+      // Swipe
+      if (absX > 40 && absX > absY) {
+        if (dx < 0) {
+          index = (index + 1) % slides.length;
+        } else {
+          index = (index - 1 + slides.length) % slides.length;
+        }
+        render();
+      }
+    },
+    { passive: true }
+  );
+
   render();
 })();
 
