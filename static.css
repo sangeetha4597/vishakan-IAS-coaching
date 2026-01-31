@@ -1390,7 +1390,7 @@ padding: 0 !important;
   }
   .contact-form-card { 
         grid-row: 2;
-        width: 370px ! important;
+        width: 326px ! important;
         height: 100%;
   }
   .contact-right {
@@ -1404,7 +1404,7 @@ padding: 0 !important;
     justify-content: center;
     gap: 24px;
     margin-top: 28px;
-    padding-left: 80px;
+    padding-left: 60px;
   }
 
   .contact-left,
