@@ -334,6 +334,81 @@ function buildHeroSlider(imageUrls) {
 })();
 
 /* ============================
+   ABOUT FOUNDER SLIDER
+============================ */
+(() => {
+  const aboutSections = Array.from(document.querySelectorAll("section.about-founder"));
+  if (!aboutSections.length) return;
+
+  // If there's only one About block, no slider needed.
+  if (aboutSections.length === 1) return;
+
+  const first = aboutSections[0];
+  const parent = first.parentElement;
+  if (!parent) return;
+
+  const slider = document.createElement("div");
+  slider.className = "about-founder-slider";
+
+  const track = document.createElement("div");
+  track.className = "about-founder-slider-track";
+  slider.appendChild(track);
+
+  const prevBtn = document.createElement("button");
+  prevBtn.type = "button";
+  prevBtn.className = "about-founder-nav about-founder-prev";
+  prevBtn.setAttribute("aria-label", "Previous founder");
+  prevBtn.textContent = "❮";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.type = "button";
+  nextBtn.className = "about-founder-nav about-founder-next";
+  nextBtn.setAttribute("aria-label", "Next founder");
+  nextBtn.textContent = "❯";
+
+  slider.appendChild(prevBtn);
+  slider.appendChild(nextBtn);
+
+  parent.insertBefore(slider, first);
+
+  aboutSections.forEach((sec, i) => {
+    sec.classList.add("about-founder-slide");
+    if (i === 0) sec.classList.add("active");
+    track.appendChild(sec);
+  });
+
+  let index = 0;
+
+  const getSlides = () => Array.from(track.querySelectorAll(".about-founder-slide"));
+
+  function render() {
+    const slides = getSlides();
+    slides.forEach((s) => s.classList.remove("active"));
+    slides[index]?.classList.add("active");
+
+    const showNav = slides.length > 1;
+    prevBtn.style.display = showNav ? "" : "none";
+    nextBtn.style.display = showNav ? "" : "none";
+  }
+
+  prevBtn.addEventListener("click", () => {
+    const slides = getSlides();
+    if (slides.length <= 1) return;
+    index = (index - 1 + slides.length) % slides.length;
+    render();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const slides = getSlides();
+    if (slides.length <= 1) return;
+    index = (index + 1) % slides.length;
+    render();
+  });
+
+  render();
+})();
+
+/* ============================
    TESTIMONIAL SLIDER
 ============================ */
 (() => {
