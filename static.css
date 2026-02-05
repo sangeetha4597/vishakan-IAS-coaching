@@ -422,7 +422,7 @@ nav a:hover {
 
 .about-founder-name {
   padding: 0;
-  margin: 0 0 6px;
+  margin: 0 -41px 6px;
   font-size: 30px;
   font-weight: 800;
   color: var(--color-primary);
@@ -431,7 +431,7 @@ nav a:hover {
 .about-founder-role {
   padding: 0 !important;
   margin: 0 0 22px;
-  font-size: 14px !important;
+  font-size: 25Spx !important;
   font-weight: 700;
   color: #2c77ad;
 }
@@ -439,7 +439,7 @@ nav a:hover {
 .about-founder-content p {
   padding: 0 !important;
   margin: 0 0 14px;
-  font-size: 14px !important;
+  font-size: 14px ;
   line-height: 1.9;
   color: #000000;
 }
@@ -509,7 +509,11 @@ nav a:hover {
 @media (max-width: 560px){
   .about-founder-nav{
     display: none;
+
   }
+   .about-founder-name{
+      margin: 0 0px 6px;
+    }
 }
 /* hero slide2  */
 .slide-left {
