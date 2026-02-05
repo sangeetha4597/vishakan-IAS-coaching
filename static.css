@@ -3118,7 +3118,7 @@ footer ul li i > svg{
 .courses .courses-title-main::after {
   content: "";
   display: block;
-  width: min(260px, 70%);
+  width: 100%;
   height: 6px;
   margin: 14px auto 0;
   background: var(--color-primary);
