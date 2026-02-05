@@ -379,7 +379,7 @@ nav a:hover {
 .about-founder-subtitle {
   padding: 0 !important;
   margin: 10px 0 0;
-  font-size: 16px !important;
+  font-size: 22px !important;
   line-height: 1.4;
   color: #000000;
 }
@@ -433,7 +433,7 @@ nav a:hover {
 .about-founder-name {
   padding: 0;
   margin: 0 -41px 6px;
-  font-size: 30px;
+  font-size: 34 px;
   font-weight: 800;
   color: var(--color-primary);
 }
@@ -1565,7 +1565,7 @@ padding: 0 !important;
   }
 
   p:not([class]) {
-    font-size: 16px !important;
+    font-size: 20px !important;
     line-height: 1.55 !important;
     padding: 8px 0 !important;
   }
@@ -2208,9 +2208,10 @@ padding: 0 !important;
 .contact-icons small {
   display: block;
   color: #000000;
-  font-size: 13px;
+  font-size: 16px;
+  line-height: 1.25;
   white-space: nowrap;
-  padding-bottom: 13px;
+  padding-bottom: 6px;
 
 }
 
