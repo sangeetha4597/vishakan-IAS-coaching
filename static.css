@@ -1404,7 +1404,8 @@ padding: 0 !important;
   .contact-left { 
     grid-row: 1; 
     padding-left: 0;
-    text-align: center;
+    text-align: left;
+    margin: 0px 38px 7px;
   }
   .contact-form-card { 
         grid-row: 2;
@@ -1414,7 +1415,8 @@ padding: 0 !important;
   .contact-right {
      grid-row: 3;
      padding-left: 0;
-     text-align: center;
+     text-align: left;
+     margin: 0px 24px 7px;
     }
 
   .contact-icons {
@@ -2148,22 +2150,23 @@ padding: 0 !important;
   padding: 0 !important;
   margin: 0 0 34px;
   color: #000000;
-  font-size: 16px !important;
+  font-size: 25px !important;
   line-height: 1.5;
 }
 
 .contact-left h3 {
-  padding: 0;
-  margin: 0 0 12px;
-  color: var(--color-primary);
-  font-size: 18px;
-  font-weight: 800;
+      padding: 0;
+    margin: 17px 0 12px;
+    color: var(--color-primary);
+    font-size: 40px;
+    font-weight: 800;
+
 }
 
 .contact-left p {
   padding: 0 !important;
   margin: 0;
-  font-size: 14px !important;
+  font-size: 22px !important;
   line-height: 1.9;
   color: #000000;
 }
@@ -2173,7 +2176,7 @@ padding: 0 !important;
   display: flex;
   justify-content: space-between;
   gap: 90px;
-  margin-top: 70px;
+  margin-top: 25px;
   max-width: 520px;
 }
 
@@ -2190,16 +2193,16 @@ padding: 0 !important;
   display: grid;
   place-items: center;
   margin: 0 auto 14px;
-  font-size: 28px;
+  font-size: 38px;
   padding: 0;
 }
 
 .contact-icons span {
-  display: block;
-  color: var(--color-primary);
-  font-weight: 800;
-  font-size: 16px;
-  margin-bottom: 6px;
+    display: block;
+    color: var(--color-primary);
+    font-weight: 800;
+    font-size: 32px;
+    margin-bottom: 4px;
 }
 
 .contact-icons small {
@@ -2598,7 +2601,7 @@ footer {
 .achievers-section{
   padding: 0px 0 110px;
   background: #ffffff;
-  /* border-bottom: 27px solid var(--color-primary); */
+  height:1083px;
 }
 
 .achievers-title{
@@ -2670,6 +2673,7 @@ footer {
 @media (max-width: 560px){
   .achievers-section{
     padding: 0px 0 70px;
+    height: auto;
   }
 
   .achievers-carousel{
@@ -2804,8 +2808,8 @@ footer {
 
 @media (max-width: 560px){
   .achiever-avatar{
-    width: 96px;
-    height: 96px;
+  width: 154px;
+  height: 154px;
     margin: 0 auto 12px;
   }
 }
@@ -2815,7 +2819,7 @@ footer {
   margin: 16px 0 0;
   padding: 0 !important;
   color: #1976d2;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 800;
 }
 
@@ -2823,7 +2827,7 @@ footer {
   margin: 8px 0 0;
   padding: 0 !important;
   color: #1976d2;
-  font-size: 12px;
+  font-size: 22px;
   font-weight: 700;
 }
 
