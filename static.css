@@ -1621,7 +1621,7 @@ padding: 0 !important;
   p:not([class]) {
     font-size: 20px !important;
     line-height: 1.55 !important;
-    padding: 8px 0 !important;
+    padding: 0px 0 !important;
   }
 
   /* NAV: stack links + CTA cleanly */
@@ -2072,10 +2072,11 @@ padding: 0 !important;
   }
 
   .video-nav-btn{ width: 46px; height: 46px; }
-  .video-carousel-wrapper{ height: 438px; }
+  .video-carousel-wrapper{ height: 361px; }
   .video-thumb-img{ height: 190px; }
   .video-card iframe{ height: 190px; }
-  .video-card .play-btn{ top: 159px; }
+  .video-card .play-btn{ top: 95px; }
+  .video-card .thumb{ height: 193px;}
 }
 
 /* SLIDER */
