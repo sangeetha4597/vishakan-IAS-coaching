@@ -442,10 +442,11 @@ nav a:hover {
 
 .about-founder-name {
   padding: 0;
-  margin: 0 -3px 6px;
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--color-primary);
+    margin: 0 -3px 6px;
+    font-size: 49px;
+    font-weight: 990;
+    color: var(--color-primary);
+
 }
 
 .about-founder-qual {
@@ -485,7 +486,7 @@ nav a:hover {
   color: #ffffff;
   border-radius: 10px;
   padding: 18px 18px;
-  width: 165px;
+  width: 173px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
 }
@@ -498,7 +499,7 @@ nav a:hover {
 }
 
 .about-founder-stat-label {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.2;
   opacity: 0.95;
 }
@@ -1129,7 +1130,7 @@ padding: 0 !important;
 }
 
 .why-card-icon {
-  font-size: 30px;
+  font-size: 61px;
   color: var(--color-primary);
   margin-bottom: 18px;
   display: flex;
@@ -1137,13 +1138,22 @@ padding: 0 !important;
 }
 
 .why-card h3 {
-  padding: 0;
+  padding: 0 0 0 56px;
   margin: 0 0 14px;
   font-size: 23px;
   font-weight: 800;
   color: var(--color-primary);
 }
 
+.why-card h2 {
+ padding: 0 0 0 110px;
+    margin: 0 0 14px;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 0;
+
+}
 .why-card p {
   padding: 0 !important;
   margin: 0;
@@ -2676,11 +2686,11 @@ footer {
 
 .achievers-underline{
       display: block;
-    width: 66px;
+    width: 206px;
     height: 7px;
     background: #1976d2;
     border-radius: 999px;
-    margin: -8px 479px -1px;
+    margin: -9px 609px -1px;
 }
 
 .achievers-carousel{
