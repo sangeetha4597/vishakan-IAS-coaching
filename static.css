@@ -1139,11 +1139,12 @@ padding: 0 !important;
 }
 
 .why-card h3 {
-  padding: 0 0 0 56px;
+  padding: 0;
   margin: 0 0 14px;
   font-size: 23px;
   font-weight: 800;
   color: var(--color-primary);
+  text-align: center;
 }
 
 .why-card h2 {
