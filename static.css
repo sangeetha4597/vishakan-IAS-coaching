@@ -25,8 +25,8 @@ body {
   font-family: var(--font-base);
   font-weight: 400;
   font-style: normal;
-  font-size: 19px;
-  line-height: 1.6;
+  font-size: 33px;
+  line-height: 1;
 }
 
 /* No italics anywhere (including <i> tags used for icons) */
@@ -64,7 +64,7 @@ html {
 }
 
 .container {
-  width: min(1200px, 100%);
+     width: min(1606px, 100%);
   margin: 0 auto;
   padding: 0 var(--page-pad-x);
 }
@@ -79,12 +79,15 @@ html {
 
 /* Make header full-width so logo can sit at the left end */
 .top-bar .container.nav {
-  width: 100%;
+  width: 101%;
   max-width: none;
   margin: 0;
-  padding-left: clamp(12px, 2vw, 24px);
-  padding-right: clamp(12px, 2vw, 24px);
+  /* padding-left: clamp(12px, 2vw, 55px);
+  padding-right: clamp(12px, 2vw, 24px); */
   border-bottom: 10px solid white;
+  padding-right: 105px;
+  padding-left: 105px;
+
 }
 
  
@@ -127,24 +130,29 @@ header {
     align-items: center;
   gap: 14px;
   margin-right: clamp(12px, 2.5vw, 44px);
+  
 }
 
 .logo {
-    width: 87px;
+    width: 100px;
 }
 
 .logo-area h2 {
   padding: 0;
   margin: 0;
-  font-size: 35px;
+  font-size: 47px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.05;
   color: var(--color-primary);
-  white-space: nowrap;
+  white-space: normal;
+}
+
+.logo-area h2 .brand-line {
+  display: inline;
 }
 
 .nav nav {
-  flex: 1 1 auto;
+  flex: 1 1 1;
   display: flex;
   justify-content: center;
 }
@@ -152,7 +160,7 @@ header {
 nav ul {
     display: flex;
     list-style: none;
-    gap: clamp(22px, 3.2vw, 56px);
+    gap: clamp(22px, 3.2vw, 70px);
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -162,11 +170,12 @@ nav ul {
 }
 
 nav a {
-    font-weight: 600;
+    font-weight: 999;
     /* color: #0a1a33; */
   color: var(--color-primary);
-    font-size: 19px;
-    letter-spacing: 0.1px;
+    font-size: 23px;
+    letter-spacing: -0.9px;
+
 }
 
 nav a:hover {
@@ -371,7 +380,7 @@ nav a:hover {
 .about-founder-header h2 {
   padding: 0;
   margin: 0;
-  font-size: 44px;
+  font-size: 100px;
   font-weight: 800;
   color: var(--color-primary);
 }
@@ -379,7 +388,7 @@ nav a:hover {
 .about-founder-subtitle {
   padding: 0 !important;
   margin: 10px 0 0;
-  font-size: 22px !important;
+  font-size: 24px !important;
   line-height: 1.4;
   color: #000000;
 }
@@ -394,11 +403,12 @@ nav a:hover {
 }
 
 .about-founder-body {
-  margin-top: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 70px;
+ margin-top: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
 }
 
 .about-founder-media {
@@ -432,16 +442,25 @@ nav a:hover {
 
 .about-founder-name {
   padding: 0;
-  margin: 0 -41px 6px;
-  font-size: 34 px;
+  margin: 0 -3px 6px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--color-primary);
+}
+
+.about-founder-qual {
+  margin: 0 0 14px;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 700;
+   color: var(--color-primary);
+  line-height: 1.6;
 }
 
 .about-founder-role {
   padding: 0 !important;
   margin: 0 0 22px;
-  font-size: 25Spx !important;
+  font-size: 24px !important;
   font-weight: 700;
   color: #2c77ad;
 }
@@ -449,7 +468,7 @@ nav a:hover {
 .about-founder-content p {
   padding: 0 !important;
   margin: 0 0 14px;
-  font-size: 21px ;
+  font-size: 25px ;
   line-height: 1.9;
   color: #000000;
 }
@@ -854,7 +873,7 @@ nav a:hover {
 .btn {
   padding: 12px 26px;
   border-radius: 30px;
-  font-size: 15px;
+  font-size: 22px;
   cursor: pointer;
 }
 
@@ -1263,6 +1282,14 @@ padding: 0 !important;
     margin: 0;
   }
 
+  .top-bar .container.nav {
+    width: 100%;
+    padding-left: var(--page-pad-x);
+    padding-right: var(--page-pad-x);
+  }
+
+  
+
   /* Reduce global heading padding on mobile */
   h1, h2, h3 {
     padding: 10px 0;
@@ -1286,9 +1313,10 @@ padding: 0 !important;
 
   .nav-toggle {
     display: inline-flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    margin-left: auto;
+    margin: 0 auto;
+    align-self: center;
 
 
 
@@ -1324,13 +1352,28 @@ padding: 0 !important;
   }
 
   .logo-area {
-    flex-direction: row;
-    gap: 10px;
-    text-align: left;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
   }
 
   .logo-area h2 {
+    font-size: clamp(26px, 6vw, 34px);
+    line-height: 1.05;
     white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .logo-area h2 .brand-line {
+    display: block;
   }
 
   .nav-cta {
@@ -1341,6 +1384,7 @@ padding: 0 !important;
 
   .logo {
     width: 72px;
+    margin: 0 auto;
   }
 
   /* HERO */
@@ -1593,18 +1637,26 @@ padding: 0 !important;
     flex-direction: column;
     gap: 6px;
     text-align: center;
-    padding-left: 28px;
+    padding-left: 0;
   }
   .logo-area  .logo {
-    width: 77px;
-    height: 68px;
-
-  }
+   width: 124px;
+        height: 99px;
+    }
 
   .logo-area h2 {
     padding: 0;
-    font-size: 24px;
+    font-size: clamp(22px, 7vw, 30px);
     line-height: 1.2;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .logo-area h2 .brand-line {
+    display: block;
   }
 
   nav ul {
@@ -2876,7 +2928,7 @@ footer {
 .site-footer .footer-title{
   margin: 0 0 14px;
   padding: 0;
-  font-size: 23px;
+  font-size: 37px;
   font-weight: 800;
   color: #ffffff;
 }
@@ -2909,7 +2961,7 @@ footer .footer-box img{
 .site-footer .footer-list li{
   margin: 8px 0;
   color: rgba(255,255,255,0.95);
-  font-size: 21px;
+  font-size: 21 px;
 }
 
 /* Quick links: simple vertical list */
@@ -3111,7 +3163,7 @@ footer ul li i > svg{
   }
 
   .card {
-    height: 650px;
+    height: 417px;
   }
 }
 
@@ -3178,6 +3230,7 @@ footer ul li i > svg{
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   align-items: stretch;
+  justify-items: stretch;
 }
 
 .card {
@@ -3190,6 +3243,7 @@ footer ul li i > svg{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Ensure course card headings sit at the top (override global h1/h2/h3 padding) */
@@ -3212,11 +3266,11 @@ footer ul li i > svg{
   margin-bottom: 14px;
     text-align: center;
     line-height: 1.15;
-    min-height: 1.3em;
+    min-height: 2.6em;
     display: flex;
     justify-content: center;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .card .desc {
@@ -3230,7 +3284,9 @@ footer ul li i > svg{
   list-style: none;
   padding: 0;
   margin: 0 0 22px;
-  overflow: visible;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .card ul li {
