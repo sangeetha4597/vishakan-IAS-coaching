@@ -535,7 +535,9 @@ nav a:hover {
   .about-founder-stats {
     flex-wrap: wrap;
     justify-content: center;
+
   }
+
 }
 
 @media (max-width: 560px){
@@ -1469,6 +1471,7 @@ padding: 0 !important;
         grid-row: 2;
         width: 326px ! important;
         height: 100%;
+        margin: 0 14px 0 0px;
   }
   .contact-right {
      grid-row: 3;
