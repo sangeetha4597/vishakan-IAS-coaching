@@ -431,6 +431,7 @@ nav a:hover {
   height: min(420px, 100%);
   max-width: 420px;
   max-height: 420px;
+  border: 5px solid #d4af37;
   border-radius: 999px;
   object-fit: cover;
   transform: none;
