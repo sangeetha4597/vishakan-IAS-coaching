@@ -455,6 +455,7 @@ function buildHeroSlider(imageUrls) {
   // Mobile: allow swipe and tap-left/tap-right navigation when buttons are hidden
   let startX = 0;
   let startY = 0;
+  let lastTouchAt = 0;
   slider.addEventListener(
     "touchstart",
     (e) => {
@@ -471,6 +472,8 @@ function buildHeroSlider(imageUrls) {
     (e) => {
       const t = e.changedTouches && e.changedTouches[0];
       if (!t) return;
+
+      lastTouchAt = Date.now();
 
       const dx = t.clientX - startX;
       const dy = t.clientY - startY;
@@ -501,6 +504,29 @@ function buildHeroSlider(imageUrls) {
     },
     { passive: true }
   );
+
+  // Tablet/desktop fallback: if arrows are hidden, allow click-left/click-right navigation.
+  slider.addEventListener("click", (e) => {
+    // Avoid double navigation on touch devices (click fires after touchend)
+    if (Date.now() - lastTouchAt < 650) return;
+
+    // Only run this behavior when nav buttons are hidden by CSS
+    const prevHidden = window.getComputedStyle(prevBtn).display === "none";
+    const nextHidden = window.getComputedStyle(nextBtn).display === "none";
+    if (!(prevHidden && nextHidden)) return;
+
+    // Don't hijack clicks on interactive elements inside the slide
+    const interactive = e.target && e.target.closest && e.target.closest("a, button, input, textarea, select, label");
+    if (interactive) return;
+
+    const slides = getSlides();
+    if (slides.length <= 1) return;
+
+    const rect = slider.getBoundingClientRect();
+    const isRight = (e.clientX - rect.left) > rect.width / 2;
+    index = isRight ? (index + 1) % slides.length : (index - 1 + slides.length) % slides.length;
+    render();
+  });
 
   render();
 })();
