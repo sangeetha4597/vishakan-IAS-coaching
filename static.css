@@ -85,8 +85,9 @@ html {
   /* padding-left: clamp(12px, 2vw, 55px);
   padding-right: clamp(12px, 2vw, 24px); */
   border-bottom: 10px solid white;
-      padding-right: 116px;
-    padding-left: 44px;
+      padding-right: 44px;
+    padding-left: 29px;
+
 }
 
 
@@ -121,17 +122,18 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  min-height: 96px;
-  gap: clamp(20px, 3vw, 48px);
+    min-height: 113px;
+    gap: clamp(20px, 3vw, 48px);
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-  gap: 14px;
-  margin-right: clamp(12px, 2.5vw, 44px);
-  
+    gap: 0px;
+    margin-right: clamp(12px, 2.5vw, 44px);
 }
+  
+
 
 .logo {
     width: 100px;
@@ -140,11 +142,11 @@ header {
 .logo-area h2 {
   padding: 0;
   margin: 0;
-  font-size: 47px;
+  font-size: clamp(44px, 3vw, 56px);
   font-weight: 800;
   line-height: 1.05;
   color: var(--color-primary);
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .logo-area h2 .brand-line {
@@ -1188,6 +1190,55 @@ padding: 0 !important;
    RESPONSIVE OVERRIDES
    Mobile / Tablet / Desktop
 ========================= */
+
+/* Responsive (Laptop): applies for screens <= 1366px */
+@media (max-width: 1366px) {
+  .top-bar .container.nav {
+    width: 100%;
+    padding-left: clamp(16px, 2vw, 32px);
+    padding-right: clamp(16px, 2vw, 32px);
+  }
+
+  .nav {
+    min-height: 92px;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+
+  .logo-area {
+    gap: 10px;
+    margin-right: 18px;
+    flex: 0 0 auto;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .logo-area h2 {
+    font-size: clamp(34px, 2.4vw, 44px);
+    white-space: nowrap;
+  }
+
+  .nav nav {
+    min-width: 0;
+  }
+
+  nav ul {
+    gap: clamp(14px, 2.2vw, 34px);
+    flex-wrap: nowrap;
+  }
+
+  nav a {
+    font-size: 19px;
+    letter-spacing: -0.4px;
+  }
+
+  .nav-cta {
+    padding: 12px 32px;
+    font-size: 16px;
+  }
+}
 
 /* Responsive (Tablet & below): applies for screens <= 1024px */
 @media (max-width: 1024px) {
