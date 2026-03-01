@@ -358,7 +358,7 @@ nav a:hover {
 
 .about-founder-nav{
   position: absolute;
-  top: var(--about-founder-nav-top, 50%);
+  top: 50%;
   transform: translate3d(0, -50%, 0);
   will-change: transform;
   width: 44px;

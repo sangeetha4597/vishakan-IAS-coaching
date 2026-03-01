@@ -493,21 +493,6 @@ function buildHeroSlider(imageUrls) {
     slides.forEach((s) => s.classList.remove("active"));
     slides[index]?.classList.add("active");
 
-    // Align nav buttons to the active slide's media center so they don't jump
-    // when slide content heights differ.
-    const active = slides[index];
-    const media = active && active.querySelector ? active.querySelector(".about-founder-media") : null;
-    if (media) {
-      const sliderRect = slider.getBoundingClientRect();
-      const mediaRect = media.getBoundingClientRect();
-      const centerY = (mediaRect.top - sliderRect.top) + mediaRect.height / 2;
-      if (Number.isFinite(centerY)) {
-        slider.style.setProperty("--about-founder-nav-top", `${centerY}px`);
-      }
-    } else {
-      slider.style.removeProperty("--about-founder-nav-top");
-    }
-
     const showNav = slides.length > 1;
     prevBtn.style.display = showNav ? "" : "none";
     nextBtn.style.display = showNav ? "" : "none";
@@ -535,9 +520,19 @@ function buildHeroSlider(imageUrls) {
   let startX = 0;
   let startY = 0;
   let lastTouchAt = 0;
+  let touchStartedOnInteractive = false;
   slider.addEventListener(
     "touchstart",
     (e) => {
+      touchStartedOnInteractive = false;
+
+      const target = e.target;
+      const interactive = target && target.closest && target.closest("a, button, input, textarea, select, label");
+      if (interactive) {
+        touchStartedOnInteractive = true;
+        return;
+      }
+
       const t = e.touches && e.touches[0];
       if (!t) return;
       startX = t.clientX;
@@ -549,6 +544,11 @@ function buildHeroSlider(imageUrls) {
   slider.addEventListener(
     "touchend",
     (e) => {
+      if (touchStartedOnInteractive) {
+        touchStartedOnInteractive = false;
+        return;
+      }
+
       const t = e.changedTouches && e.changedTouches[0];
       if (!t) return;
 
