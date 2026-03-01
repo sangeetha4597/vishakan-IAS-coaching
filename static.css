@@ -2018,7 +2018,7 @@ padding: 0 !important;
 
 /* round nav buttons like reference */
 .video-nav-btn{
- 
+ display: none;
   background: #fff;
   
 }
@@ -2027,6 +2027,7 @@ padding: 0 !important;
 .video-nav-btn.video-next{
   left: auto;
   right: 0;
+  display: none;
 }
 
 /* card base (stacked like coverflow) */
