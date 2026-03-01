@@ -1195,8 +1195,9 @@ padding: 0 !important;
 @media (max-width: 1366px) {
   .top-bar .container.nav {
     width: 100%;
-    padding-left: clamp(16px, 2vw, 32px);
-    padding-right: clamp(16px, 2vw, 32px);
+   width: 100%;
+        padding-left: clamp(0px, 0vw, 0px);
+        padding-right: clamp(0px, 0vw, 0px);
   }
 
   .nav {
@@ -1206,17 +1207,17 @@ padding: 0 !important;
   }
 
   .logo-area {
-    gap: 10px;
-    margin-right: 18px;
-    flex: 0 0 auto;
-  }
+        gap: 1px;
+        margin-right: 7px;
+        flex: 0 0 auto;
+    }
 
   .logo {
     width: 80px;
   }
 
   .logo-area h2 {
-    font-size: clamp(34px, 2.4vw, 44px);
+    font-size: clamp(30px, 2.4vw, 44px);
     white-space: nowrap;
   }
 
@@ -1225,19 +1226,20 @@ padding: 0 !important;
   }
 
   nav ul {
-    gap: clamp(14px, 2.2vw, 34px);
-    flex-wrap: nowrap;
-  }
+        gap: clamp(19px, 1vw, 0px);
+        flex-wrap: nowrap;
+    }
+  
 
   nav a {
-    font-size: 19px;
+    font-size: 22px;
     letter-spacing: -0.4px;
   }
 
   .nav-cta {
-    padding: 12px 32px;
-    font-size: 16px;
-  }
+            padding: 11px 13px;
+        font-size: 22px;
+    }
 }
 
 /* Responsive (Tablet & below): applies for screens <= 1024px */
@@ -1350,6 +1352,53 @@ padding: 0 !important;
   /* Keep equal distance from slider edges */
   .hero-prev { left: 12px; }
   .hero-next { right: 12px; }
+}
+
+/* Responsive (Tablet portrait like 820px): keep top bar in laptop single-line style */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .top-bar .container.nav {
+    border-bottom-width: 10px;
+    width: 100%;
+    padding-left: clamp(16px, 2vw, 32px);
+    padding-right: clamp(16px, 2vw, 32px);
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-height: 92px;
+    gap: 16px;
+  }
+
+  .logo {
+    width: 76px;
+  }
+
+  .logo-area h2 {
+    font-size: clamp(30px, 2.6vw, 42px);
+    white-space: nowrap;
+  }
+
+  nav ul {
+    flex-wrap: nowrap;
+    gap: clamp(14px, 2.2vw, 30px);
+  }
+
+  nav a {
+    font-size: 18px;
+    letter-spacing: -0.4px;
+  }
+
+  .nav-cta {
+    margin-left: auto;
+    padding: 12px 28px;
+    font-size: 16px;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
 }
 
 /* Responsive (Mobile & small tablets): applies for screens <= 768px */
