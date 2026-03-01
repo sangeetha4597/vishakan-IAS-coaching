@@ -162,7 +162,7 @@ header {
 nav ul {
     display: flex;
     list-style: none;
-    gap: clamp(22px, 3.2vw, 70px);
+    gap: clamp(22px, 2.2vw, 70px);
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -358,10 +358,18 @@ nav a:hover {
 
 .about-founder-nav{
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: var(--about-founder-nav-top, 50%);
+  transform: translate3d(0, -50%, 0);
+  will-change: transform;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
   border-radius: 999px;
   border: 0;
   background: #ffffff;
@@ -369,7 +377,11 @@ nav a:hover {
   font-size: 22px;
   cursor: pointer;
   box-shadow: 0 10px 22px rgba(2, 6, 23, 0.12);
-  z-index: 5;
+  z-index: 50;
+}
+
+.about-founder-nav:active{
+  transform: translate3d(0, -50%, 0);
 }
 
 .about-founder-prev{ left: 12px; }
@@ -544,8 +556,12 @@ nav a:hover {
 
 /* Responsive (Tablet & below): hide About slider arrows and use touch/tap navigation */
 @media (max-width: 1024px) {
-  .about-founder-nav {
-    display: none;
+  .about-founder-nav{
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 20px;
   }
 }
 
@@ -2388,7 +2404,7 @@ textarea {
   height: 100px;
 }
 
-button {
+.contact-form-card button {
   width: 100%;
   background: var(--color-primary);
   color: #fff;
@@ -2754,12 +2770,12 @@ footer {
 }
 
 .achievers-underline{
-      display: block;
-    width: 206px;
-    height: 7px;
-    background: #1976d2;
-    border-radius: 999px;
-    margin: -9px 609px -1px;
+  display: block;
+  width: min(206px, 70vw);
+  height: 7px;
+  background: #1976d2;
+  border-radius: 999px;
+  margin: 14px auto 0;
 }
 
 .achievers-carousel{

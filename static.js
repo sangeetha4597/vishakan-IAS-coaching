@@ -473,16 +473,48 @@ function buildHeroSlider(imageUrls) {
     if (maxHeight) slider.style.minHeight = `${maxHeight}px`;
   }
 
+  function wireSlideAssetResync() {
+    const imgs = track.querySelectorAll("img");
+    imgs.forEach((img) => {
+      if (img.dataset && img.dataset.aboutFounderResyncWired) return;
+      if (img.dataset) img.dataset.aboutFounderResyncWired = "1";
+      img.addEventListener(
+        "load",
+        () => {
+          requestAnimationFrame(syncSliderMinHeight);
+        },
+        { passive: true }
+      );
+    });
+  }
+
   function render() {
     const slides = getSlides();
     slides.forEach((s) => s.classList.remove("active"));
     slides[index]?.classList.add("active");
+
+    // Align nav buttons to the active slide's media center so they don't jump
+    // when slide content heights differ.
+    const active = slides[index];
+    const media = active && active.querySelector ? active.querySelector(".about-founder-media") : null;
+    if (media) {
+      const sliderRect = slider.getBoundingClientRect();
+      const mediaRect = media.getBoundingClientRect();
+      const centerY = (mediaRect.top - sliderRect.top) + mediaRect.height / 2;
+      if (Number.isFinite(centerY)) {
+        slider.style.setProperty("--about-founder-nav-top", `${centerY}px`);
+      }
+    } else {
+      slider.style.removeProperty("--about-founder-nav-top");
+    }
 
     const showNav = slides.length > 1;
     prevBtn.style.display = showNav ? "" : "none";
     nextBtn.style.display = showNav ? "" : "none";
 
     requestAnimationFrame(syncSliderMinHeight);
+    // Some assets/fonts can settle slightly after the frame; recheck once more.
+    setTimeout(() => requestAnimationFrame(syncSliderMinHeight), 250);
   }
 
   prevBtn.addEventListener("click", () => {
@@ -586,6 +618,7 @@ function buildHeroSlider(imageUrls) {
     requestAnimationFrame(syncSliderMinHeight);
   });
 
+  wireSlideAssetResync();
   render();
 })();
 
