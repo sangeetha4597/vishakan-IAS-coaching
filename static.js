@@ -428,6 +428,51 @@ function buildHeroSlider(imageUrls) {
 
   const getSlides = () => Array.from(track.querySelectorAll(".about-founder-slide"));
 
+  function syncSliderMinHeight() {
+    const slides = getSlides();
+    if (!slides.length) return;
+
+    // Measure the tallest slide so the nav buttons (top: 50%) don't jump
+    // when moving between slides of different heights.
+    let maxHeight = 0;
+    const trackWidth = track.getBoundingClientRect().width || slider.getBoundingClientRect().width;
+
+    slides.forEach((slide) => {
+      if (slide.classList.contains("active")) {
+        maxHeight = Math.max(maxHeight, slide.offsetHeight);
+        return;
+      }
+
+      const prevDisplay = slide.style.display;
+      const prevPosition = slide.style.position;
+      const prevVisibility = slide.style.visibility;
+      const prevPointerEvents = slide.style.pointerEvents;
+      const prevLeft = slide.style.left;
+      const prevTop = slide.style.top;
+      const prevWidth = slide.style.width;
+
+      slide.style.display = "block";
+      slide.style.position = "absolute";
+      slide.style.visibility = "hidden";
+      slide.style.pointerEvents = "none";
+      slide.style.left = "0";
+      slide.style.top = "0";
+      if (trackWidth) slide.style.width = `${trackWidth}px`;
+
+      maxHeight = Math.max(maxHeight, slide.offsetHeight);
+
+      slide.style.display = prevDisplay;
+      slide.style.position = prevPosition;
+      slide.style.visibility = prevVisibility;
+      slide.style.pointerEvents = prevPointerEvents;
+      slide.style.left = prevLeft;
+      slide.style.top = prevTop;
+      slide.style.width = prevWidth;
+    });
+
+    if (maxHeight) slider.style.minHeight = `${maxHeight}px`;
+  }
+
   function render() {
     const slides = getSlides();
     slides.forEach((s) => s.classList.remove("active"));
@@ -436,6 +481,8 @@ function buildHeroSlider(imageUrls) {
     const showNav = slides.length > 1;
     prevBtn.style.display = showNav ? "" : "none";
     nextBtn.style.display = showNav ? "" : "none";
+
+    requestAnimationFrame(syncSliderMinHeight);
   }
 
   prevBtn.addEventListener("click", () => {
@@ -526,6 +573,17 @@ function buildHeroSlider(imageUrls) {
     const isRight = (e.clientX - rect.left) > rect.width / 2;
     index = isRight ? (index + 1) % slides.length : (index - 1 + slides.length) % slides.length;
     render();
+  });
+
+  // Recompute on resize (responsive text wrapping affects heights)
+  let resizeRaf = 0;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(syncSliderMinHeight);
+  });
+
+  window.addEventListener("load", () => {
+    requestAnimationFrame(syncSliderMinHeight);
   });
 
   render();
